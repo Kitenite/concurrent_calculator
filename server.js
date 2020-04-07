@@ -5,8 +5,13 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 port = 3000;
 
+// Methods
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+app.get('/calculations.json', function(req, res) {
+    res.sendFile(path.join(__dirname + '/calculations.json'));
 });
 
 app.post('/postCalculations', function(req, res) {
@@ -19,6 +24,8 @@ var server = app.listen(port, function () {
    var port = server.address().port;
    console.log(`Listening at http://localhost:${port}`);
 });
+
+// Functions
 
 function addCalc(body){
   console.log(body);

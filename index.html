@@ -15,15 +15,21 @@
       </div>
       <div id = "log-wrapper">
         <h1>Past Calculations:</h1>
-        <div id="log-list">Placeholder</div>
+        <ul id="log-list"></ul>
       </div>
     </div>
     <script type="text/javascript">
-      var path = "calculations.json";
+      var path = "./calculations.json";
       $.getJSON(path, function( data ) {
+        console.log(data);
         var items = [];
-
-        $('#contact-body').append(items);
+        $.each(data.entries, function( key, val ) {
+          var calc = '<li>'+val.calculation+'</li>';
+          items.push(calc);
+        });
+        console.log(items);
+        console.log($('#log-list'))
+        $('#log-list').append(items);
       });
       </script>
 </body>
