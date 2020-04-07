@@ -5,7 +5,7 @@ var http = require('http');
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-PORT = 3000;
+PORT = process.env.PORT || 3000;
 
 // Get Index
 app.get('/', function(req, res) {
