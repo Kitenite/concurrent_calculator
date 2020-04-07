@@ -3,34 +3,44 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
 </head>
-  <body>
-    <div id="content">
-      <div id = "input-wrapper">
-        <h1 id = "title">Enter your calculations here</h1>
-        <form method="post" action="/postCalculations">
-          <input type="text" id="calculation-input" name="calculation" placeholder="Example: 1+1" pattern = "([-+]?[0-9]*\.?[0-9]+[\/\+\-\*])+([-+]?[0-9]*\.?[0-9]+)"><br>
-          <input type="submit" value="Calculate">
-        </form>
-      </div>
-      <div id = "log-wrapper">
-        <h1>Past Calculations:</h1>
-        <ul id="log-list"></ul>
-      </div>
+<body>
+  <div id="content">
+    <div id = "input-wrapper">
+      <h1 id = "title">Enter your calculations here</h1>
+      <form method="post" action="/postCalculations">
+        <input type="text" id="calculation-input" name="calculation" placeholder="Example: 1+1" pattern = "([-+]?[0-9]*\.?[0-9]+[\/\+\-\*])+([-+]?[0-9]*\.?[0-9]+)"><br>
+        <input type="submit" value="Calculate">
+      </form>
     </div>
-    <script type="text/javascript">
+    <div id = "log-wrapper">
+      <h1>Past Calculations:</h1>
+      <ul id="log-list"></ul>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function getPastEntries(){
       var path = "./calculations.json";
       $.getJSON(path, function( data ) {
-        console.log(data);
         var items = [];
-        $.each(data.entries, function( key, val ) {
+        $.each(data.entries.slice(0, 10), function( key, val ) {
           var calc = '<li>'+val.calculation+'</li>';
           items.push(calc);
         });
-        console.log(items);
-        console.log($('#log-list'))
+        $('#log-list').empty();
         $('#log-list').append(items);
       });
-      </script>
+    }
+    getPastEntries();
+
+    // Connect socket
+    var socket = io.connect();
+    socket.on('update', function(){
+      getPastEntries();
+    });
+
+    </script>
 </body>
 </html>
