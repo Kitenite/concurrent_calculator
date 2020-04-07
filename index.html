@@ -9,7 +9,7 @@
       <div id = "input-wrapper">
         <h1 id = "title">Enter your calculations here</h1>
         <form method="post" action="/postCalculations">
-          <input type="text" id="calculation-input" name="calculation" placeholder="Example: 1+1"><br>
+          <input type="text" id="calculation-input" name="calculation" placeholder="Example: 1+1" pattern = "([-+]?[0-9]*\.?[0-9]+[\/\+\-\*])+([-+]?[0-9]*\.?[0-9]+)"><br>
           <input type="submit" value="Calculate">
         </form>
       </div>
@@ -24,7 +24,7 @@
         console.log(data);
         var items = [];
         $.each(data.entries, function( key, val ) {
-          var calc = '<li>'+val[1].calculation+'</li>';
+          var calc = '<li>'+val.calculation+'</li>';
           items.push(calc);
         });
         console.log(items);

@@ -34,15 +34,15 @@ function addCalc(body){
   var fs = require('fs');
     var file_path = 'calculations.json';
     fs.readFile(file_path, function (err, data) {
-      var entry = []
-      var date = {
-        timeStamp: Date.now()
+      expression = body.calculation +"=" + eval(body.calculation);
+      console.log(expression)
+      var entry = {
+        timeStamp: Date.now(),
+        calculation: expression
       }
-      entry.push(date);
-      entry.push(body);
       var json = JSON.parse(data);
       json.entries.unshift(entry);
-      console.log(entry); 
+      console.log(entry);
       fs.writeFileSync(file_path, JSON.stringify(json));
     });
 }
