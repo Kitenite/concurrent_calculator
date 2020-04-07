@@ -2,6 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
 </head>
@@ -9,9 +10,9 @@
   <div id="content">
     <div id = "input-wrapper">
       <h1 id = "title">Enter your calculations here</h1>
-      <form method="post" action="/postCalculations">
+      <form id = "input-form" method="post" action="/postCalculations">
         <input type="text" id="calculation-input" name="calculation" placeholder="Example: 1+1" pattern = "([-+]?[0-9]*\.?[0-9]+[\/\+\-\*])+([-+]?[0-9]*\.?[0-9]+)"><br>
-        <input type="submit" value="Calculate">
+        <input type="submit" value="Calculate" id="submit-button">
       </form>
     </div>
     <div id = "log-wrapper">
@@ -21,6 +22,7 @@
   </div>
 
   <script type="text/javascript">
+    // Get calculations
     function getPastEntries(){
       var path = "./calculations.json";
       $.getJSON(path, function( data ) {
@@ -34,9 +36,9 @@
       });
     }
     getPastEntries();
-
     // Connect socket
     var socket = io.connect();
+    // Listen for data change
     socket.on('update', function(){
       getPastEntries();
     });
