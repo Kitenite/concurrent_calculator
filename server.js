@@ -4,6 +4,8 @@ var app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 port = 3000;
+const date = new Date();
+
 
 // Methods
 app.get('/', function(req, res) {
@@ -32,8 +34,15 @@ function addCalc(body){
   var fs = require('fs');
     var file_path = 'calculations.json';
     fs.readFile(file_path, function (err, data) {
-        var json = JSON.parse(data);
-        json.entries.push(body);
-        fs.writeFileSync(file_path, JSON.stringify(json));
+      var entry = []
+      var date = {
+        timeStamp: Date.now()
+      }
+      entry.push(date);
+      entry.push(body);
+      var json = JSON.parse(data);
+      json.entries.unshift(entry);
+      console.log(entry); 
+      fs.writeFileSync(file_path, JSON.stringify(json));
     });
 }

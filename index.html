@@ -24,7 +24,7 @@
         console.log(data);
         var items = [];
         $.each(data.entries, function( key, val ) {
-          var calc = '<li>'+val.calculation+'</li>';
+          var calc = '<li>'+val[1].calculation+'</li>';
           items.push(calc);
         });
         console.log(items);
