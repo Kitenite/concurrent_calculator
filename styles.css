@@ -13,15 +13,16 @@ body {
 
 #input-form {
   margin-top: 5vw;
-  margin-left: 25vw;
-  margin-right:25vw;
-  width: 50vw;
   text-align:center
 }
 #calculation-input{
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
   font-size: 2rem;
   height: 7vh;
-  width: 40vw;
+  max-width: 80vw;
+  min-width: 50vw;
   text-align: center;
   border-radius: 10vh;
   border: 0.25rem solid #6F6F6F;
