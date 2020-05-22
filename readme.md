@@ -10,7 +10,7 @@ Data storage using static JSON file.
 Concurrency handled using socket.io.
 
 ### Demo
-[https://calculator-app-sezzle.herokuapp.com](https://calculator-app-sezzle.herokuapp.com)
+[https://concurrent-calculator.herokuapp.com](https://concurrent-calculator.herokuapp.com)
 
 ### License
 [MIT](https://choosealicense.com/licenses/mit/)
